@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Demons : MonoBehaviour
 {
     public abstract string getName();
+    public abstract string getDescription();
     public abstract string getLegions();
     public abstract string getDirection();
     public abstract string getPlanet();
@@ -12,6 +13,7 @@ public abstract class Demons : MonoBehaviour
     public abstract string getElement();
     public abstract string getZodiaco();
     public abstract void setName(string name);
+    public abstract void setDescription(string description);
     public abstract void setDirection(string direction);
     public abstract void setLegions(string legions);
     public abstract void setPlanet(string planet);
@@ -25,6 +27,9 @@ public class InterfaceDemon : Demons
     public override string getName()
     {
         return name;
+    }
+    public override string getDescription() {
+        return description;
     }
     public override string getLegions()
     {
@@ -53,6 +58,9 @@ public class InterfaceDemon : Demons
     public override void setName(string name)
     {
         this.name = name;
+    }
+    public override void setDescription(string description) {
+        this.description = description;
     }
     public override void setDirection(string direction)
     {
@@ -111,7 +119,7 @@ public class InterfaceDemon : Demons
 
     public string demonElements()
     {
-        return getName() + getLegions();
+        return getName() + getLegions() + getDescription() + getDirection() + getPlanet() + getMetal() + getElement() + getZodiaco();
         //return name + description + legions + Direction + planet + metal + element + zodiaco;
     }
 }
