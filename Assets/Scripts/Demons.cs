@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public abstract class Demons : MonoBehaviour
@@ -12,6 +13,7 @@ public abstract class Demons : MonoBehaviour
     public abstract string getMetal();
     public abstract string getElement();
     public abstract string getZodiaco();
+    public abstract GameObject getModel();
     public abstract void setName(string name);
     public abstract void setDescription(string description);
     public abstract void setDirection(string direction);
@@ -20,6 +22,7 @@ public abstract class Demons : MonoBehaviour
     public abstract void setMetal(string metal);
     public abstract void setElement(string element);
     public abstract void setZodiaco(string zodiaco);
+    public abstract void setDemonModel(GameObject gameObjet);
 }
 
 public class InterfaceDemon : Demons
@@ -55,6 +58,11 @@ public class InterfaceDemon : Demons
     {
         return zodiaco;
     }
+
+    public override GameObject getModel() {
+        return demonModel;
+    }
+
     public override void setName(string name)
     {
         this.name = name;
@@ -87,6 +95,10 @@ public class InterfaceDemon : Demons
         this.zodiaco = zodiaco;
     }
 
+    public override void setDemonModel(GameObject gameObject) {
+        this.demonModel = gameObject;
+    }
+
     private string name;
     private string description;
     private string legions;
@@ -95,8 +107,9 @@ public class InterfaceDemon : Demons
     private string metal;
     private string element;
     private string zodiaco;
+    private GameObject demonModel;
 
-    public InterfaceDemon(string name, string description, string legions, string direction, string planet, string metal, string element, string zodiaco)
+    public InterfaceDemon(string name, string description, string legions, string direction, string planet, string metal, string element, string zodiaco,GameObject model)
     {
         this.name = name;
         this.description = description;
@@ -106,6 +119,7 @@ public class InterfaceDemon : Demons
         this.metal = metal;
         this.element = element;
         this.zodiaco = zodiaco;
+        this.demonModel= model;
     }
 
     //public string Name { get { return name; } set { name = value; } }
