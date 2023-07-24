@@ -10,7 +10,7 @@ using TMPro;
 public class DemonsManager : MonoBehaviour
 {
     private List <InterfaceDemon> demons;
-    public List<GameObject> models;
+    [SerializeField]private List<GameObject> models = new List<GameObject>();
     public TextMeshProUGUI demonName;
     public TextMeshProUGUI description;
     public TextMeshProUGUI legions;
@@ -20,11 +20,12 @@ public class DemonsManager : MonoBehaviour
     public TextMeshProUGUI element;
     public TextMeshProUGUI zodiaco;
     private int index = 0;
+    public GameObject demonTmp;
     void Start()
     {
         demons = new List<InterfaceDemon>();
-        models = new List<GameObject>();
-        InterfaceDemon demon0 = new InterfaceDemon("bael", "El primer Rey del Infierno","Sesenta y seis", "sur", "Sol", "oro", "Fuego", "Aries", models[1]);
+        
+        InterfaceDemon demon0 = new InterfaceDemon("bael", "El primer Rey del Infierno","Sesenta y seis", "sur", "Sol", "oro", "Fuego", "Aries", models[0]);
         InterfaceDemon demon1 = new InterfaceDemon("Agares", "puede  ayudar a  los  fugitivos  a  escapar  y  enseña expresiones inmorales, además de acabar con la dignidad de alguien", "Treinta y uno" ,"sur","Venus","Cobre","tierra","Aries", models[1]);
         InterfaceDemon demon2 = new InterfaceDemon("Vassago", "Puede conocer el pasado y el futuro y además posee la capacidad de encontrar objetos escondidos o perdidos", "Veintiséis" , "Oeste", "Jupiter","Estaño","agua", "Aries", models[2]);
         InterfaceDemon demon3 = new InterfaceDemon("Samigina", "Enseña ciencias liberales y da cuenta de las almas que murieron en pecado y de los que se ahogaron en el mar", "Treinta" ,"Oeste","Luna","Plata","agua","Aries", models[3]);
@@ -60,6 +61,7 @@ public class DemonsManager : MonoBehaviour
         element.text = demons[index].getElement();
         zodiaco.text = demons[index].getZodiaco();
         models[0] = demons[index].getModel();
+         demonTmp = Instantiate(models[index]);
         index++;
 
 
@@ -74,6 +76,8 @@ public class DemonsManager : MonoBehaviour
         element.text = demons[index].getElement();
         zodiaco.text = demons[index].getZodiaco();
         models[index] = demons[index].getModel();
+        Destroy(demonTmp);
+        demonTmp = Instantiate(models[index]);
         index++;
         if (index >= demons.Count) {
             index = 0;
