@@ -13,7 +13,7 @@ public class Agent : MonoBehaviour {
         for (int i = 0; i < contentTarget.transform.childCount; i++) {
             target.Add(contentTarget.transform.GetChild(i).transform);
         }
-    
+
         itPosition = 0;
         ShuffleArray.shuffle(target);
     }
@@ -27,14 +27,19 @@ public class Agent : MonoBehaviour {
         navMeshAgent.SetDestination(target[itPosition].position);
         if (Vector3.Distance(target[itPosition].position, this.transform.position) < 2) {
             itPosition++;
-            if(itPosition >= target.Count - 1) {
+            if (itPosition >= target.Count - 1) {
                 itPosition = 0;
                 ShuffleArray.shuffle(target);
             }
         }
     }
-}
 
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.tag == "Bullet") {
+            gameObject.SetActive(false);
+        }
+    }
+}
 public static class ShuffleArray {
     public static void shuffle<T>(this IList<T> ts) {
         var count = ts.Count;

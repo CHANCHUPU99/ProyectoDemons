@@ -40,7 +40,7 @@ public class Manager : MonoBehaviour {
     private void activePrefab() {
         timer += Time.deltaTime;
         Debug.Log(timer);
-        if (timer >= 3) {
+        if (timer >= 2) {
             //getPrefab();itPlayer++;
             GameObject clone = Instantiate(player);
             clone.name = "Player" + itPlayer;

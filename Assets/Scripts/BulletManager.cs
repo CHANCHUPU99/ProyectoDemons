@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class BulletManager : MonoBehaviour
 {
+    [SerializeField] private float speed;
     Rigidbody m_rigidBody;
-
+    private Transform player;
+    [SerializeField] float timeBetweenShoots;
+   
     private void Start() {
-        m_rigidBody = gameObject.GetComponent<Rigidbody>();
+        player = FindObjectOfType<Agent>().transform;
+        m_rigidBody= GetComponent<Rigidbody>();
+        LaunchProjectible();
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Enemy")) {
-            foreach(GameObject enemy in Manager.instance.poolMutantPrefab) {
-                Destroy(enemy);
-            }
-        }
+    private void LaunchProjectible() {
+        Vector3 directionTolayer = (player.position - transform.position).normalized;
+        m_rigidBody.velocity = directionTolayer * speed;
+        //StartCoroutine(DestroyProjectible());
     }
+
 }
